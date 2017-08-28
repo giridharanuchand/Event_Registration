@@ -1,0 +1,142 @@
+<apex:page controller="EventListController"  sidebar="false"  showHeader="false" id="evPage" docType="html-5.0">
+    <apex:stylesheet value="{!URLFOR($Resource.backgroundStyles, 'backgroundStyles/customStyles.css')}"/>
+    <apex:form id="evForm">
+        <a href="http://cci.uncc.edu/partners/membership"  target="_blank">
+            <apex:image value="{!URLFOR($Resource.banner, 'img/newBanner.png')}"  style="width:99%; margin-right:0.5%; margin-left:0.5%; margin-top:0.5%; margin-bottom-0.5%;"/>
+        </a>
+        <div style="width:96%; margin-right:2%; margin-left:2%;"  id="rowdiv">
+            <p>
+                <b>TERA PARTNERS</b> may register for up to 4 CCI Recruiting events (i.e. 1 information session, 1-2 career fairs, and 1-2 classroom industry panel or speaking options) 
+            </p>
+            <p>
+                <b>MEGA PARTNERS</b> may register for up to 2 CCI Recruiting events (i.e. 1 information session and 1 career fair and/or 1-2 class options) 
+            </p>
+            <p>
+                <b>DECA PARTNERS</b> may register for 1 Recruiting event
+            </p>
+            <br/>
+            <br/>
+            <br/>
+            <apex:stylesheet value="{!URLFOR($Resource.backgroundStyles, 'backgroundStyles/customStyles.css')}"/>
+            <script type="text/javascript">
+      function nextPage(){
+      
+      document.getElementById('{!$Component.evPage.evForm.link}').click();  
+      }
+      
+      
+      </script>
+        </div>
+        <apex:commandLink target="_blank" action="{!pageTransfer}" id="link" style="display:none;" ></apex:commandLink>
+        <apex:commandButton value="New User ? SignUp to Register the Event" id="submitBtn1" action="https://c.cs44.visual.force.com/apex/SignUpTest" style="width: 450px; margin-left:15%;  background: #468c2e;
+          background-image: -webkit-linear-gradient(top, #468c2e, #468c2e);
+  background-image: -moz-linear-gradient(top, #4169E1, #4169E1);
+  background-image: -ms-linear-gradient(top, #4169E1, #4169E1);
+  background-image: -o-linear-gradient(top, #4169E1, #4169E1);
+  background-image: linear-gradient(to bottom, #4169E1, #4169E1);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;"/>
+  
+        <apex:commandButton value="Existing User ? Login to Register the Event" id="submitBtn2" action="https://c.cs44.visual.force.com/apex/LoginTest" style="width: 450px; margin-left:20%;  background: #468c2e;
+  background-image: -webkit-linear-gradient(top, #4169E1, #4169E1);
+  background-image: -moz-linear-gradient(top, #4169E1, #4169E1);
+  background-image: -ms-linear-gradient(top, #4169E1, #4169E1);
+  background-image: -o-linear-gradient(top, #4169E1, #4169E1);
+  background-image: linear-gradient(to bottom, #4169E1, #4169E1);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;"/>
+        <br/>
+        <br/>
+        <br/>
+        <div style="float:left;  width: 65%; margin-left:2%"> 
+        
+        <canvas id="redCanvas" width="20" height="20" style="border:1px solid #d3d3d3;"></canvas>&nbsp;&nbsp;&nbsp; 
+                <font size="4">Unavailable Events</font>
+                
+                <canvas id="greenCanvas" width="20" height="20" style="border:1px solid #d3d3d3;"></canvas>&nbsp;&nbsp;&nbsp;
+                <font size="4">Available Events</font>
+               <br/>
+        <br/> 
+                <script>
+
+var c = document.getElementById("redCanvas");
+var ctx = c.getContext("2d");
+ctx.fillStyle="#C00000";
+ctx.fillRect(0, 0, 20, 20);
+
+</script>
+                <script>
+var c = document.getElementById("greenCanvas");
+var ctx = c.getContext("2d");
+ctx.fillStyle="#21610B";
+ctx.fillRect(0, 0, 20, 20);
+
+</script>
+        
+            <apex:dataTable value="{!listAllEvents}" var="ev"  style="font: 15px Calibri, sans-serif; font-weight: bold;" border="1" cellspacing="5" cellpadding="5" rowClasses="rowOdd,rowEven" width="90%">
+                <apex:column style="font: 15px Calibri, sans-serif; font-weight: bold;" id="CSSTabler">
+                    <apex:facet name="header">Event Name</apex:facet>
+                    <apex:outputText value="{!ev.eveName}" style="color:{!ev.eveColor}"/>
+                    
+                    
+                </apex:column>
+           
+                <apex:column style="font: 15px Calibri, sans-serif; font-weight: bold;">
+                    <apex:facet name="header">Event Date</apex:facet>
+                    <apex:outputText value="{!ev.eveDate}" style="color:{!ev.eveColor}"/>
+                </apex:column>
+                
+                 
+                  <apex:column style="font: 15px Calibri, sans-serif; font-weight: bold;">
+                    <apex:facet name="header">Event Location</apex:facet>
+                    <apex:outputText value="{!ev.eveRoom}"/>
+                </apex:column>
+                
+                <apex:column style="font: 15px Calibri, sans-serif; font-weight: bold;">
+                    <apex:facet name="header">Description</apex:facet>
+                    <apex:outputLink value="{!ev.eveDescription}" target="_blank" style="color:blue;">Description</apex:outputLink>
+                    <!--<apex:commandLink value="{!ev.link}" target="_blank"  id="submitBtn" style="width: 100px;" />-->
+                    <!--<apex:outputText value="{!ev.link}"/>-->
+                </apex:column>
+            </apex:dataTable>
+        </div>
+        <div style="float:left;  width: 30%;">
+        <!-- Giri code change starts  -->
+        <!--    <span class="blinking_text" style="font: 30px Calibri, sans-serif; color:#4169E1;">Join US For These Recruiting Events:</span> -->
+        <!--    <br/>  -->
+        <!--    <br/>  -->
+        <!--    <a href="http://cybersecurity.uncc.edu/" target="_blank" ><h2>October 5th Cyber Security Symposium</h2></a><br/>  -->
+
+            
+        <!--    <a href="https://na24.salesforce.com/sfc/p/1a000000JBvq/a/1a0000008S3b/KhS_vj_rUGgdyhgG5DA6h7zA3xiwfGGzygyQk_8TEOI" target="_blank" ><h2>November 1st Dean's High Achievers Event</h2></a><br/>  -->
+        <span  style="font: 26px Calibri, sans-serif; color:#298A08;"><b>Join US For These Recruiting Events:</b></span><br/><br/>
+        <a href="http://cybersecurity.uncc.edu/" target="_blank"><font face="Comic sans MS" size="+1">October 5th Cyber Security Symposium</font></a><br/><br/>
+        <a href="https://na24.salesforce.com/sfc/p/1a000000JBvq/a/1a0000008S3b/KhS_vj_rUGgdyhgG5DA6h7zA3xiwfGGzygyQk_8TEOI" target="_blank" ><font face="Comic sans MS" size="+1">November 1st Dean's High Achievers Event</font></a><br/><br/>
+        <a href="http://cci.uncc.edu/partners/industry-solutions-projects" target="_blank" ><font face="Comic sans MS" size="+1">December 14th Innovation Computing Projects Showcase</font></a><br/><br/>
+                <!-- Giri code change ends-->    
+        </div>
+        <style>
+        .rowOdd{
+        background-color:#d4ffaa;
+        }
+        .rowEven{
+        background-color:white;
+        }
+        </style>
+        <br/>
+        <br/>
+        <br/>
+    </apex:form>
+</apex:page>

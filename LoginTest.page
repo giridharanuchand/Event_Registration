@@ -1,0 +1,72 @@
+<apex:page controller="LoginTest" showheader="false">
+<a href="http://cci.uncc.edu/partners/membership"  target="_blank">
+         <apex:image value="{!URLFOR($Resource.banner, 'img/newBanner.png')}"  style="width:99%; margin-right:0.5%; margin-left:0.5%; margin-top:0.5%; margin-bottom-0.5%;"/> 
+ <!--   <apex:image value="{!URLFOR($Resource.backgroundImages, 'Img/Img1.png')}"  style="width:99%; "/>  -->
+<!-- <apex:image value="{!URLFOR($Resource.backgroundImg)}"  style="width:99%; margin-right:0.5%; margin-left:0.5%; margin-top:0.5%; margin-bottom-0.5%;"/> -->
+        </a>
+  <apex:stylesheet value="{!URLFOR($Resource.SATProResource, 'css/bootstrap.min.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.SATProResource, '/js/jquery.min.js')}"></apex:includeScript>
+     <apex:includeScript value="{!URLFOR($Resource.SATProResource, '/js/bootstrap.min.js')}"></apex:includeScript>
+   
+
+<apex:form >
+
+ 
+  
+  
+  
+  <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"> 
+  <div class="panel panel-info" >
+  <div class="panel-heading">
+                        <div class="panel-title">Sign In</div>
+                <!--        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>  -->
+  </div> 
+  <div style="padding-top:30px" class="panel-body" >
+
+ <h1>Welcome to Partner Login</h1><br/> <br/>
+        <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                       
+        
+    <!--    <apex:outputLabel value="User  "></apex:outputLabel>&nbsp;  -->
+
+        <apex:selectList size="1" style="height:30px; width:190px;color:black" value="{!selecteduser}">
+
+             <apex:selectOptions value="{!users}"></apex:selectOptions>
+
+        </apex:selectList>
+
+
+        </div>
+       
+
+    <!--    <apex:outputLabel value="Password  "></apex:outputLabel> -->
+    
+        <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        <apex:inputSecret value="{!inputValue}" style="height:30px;width:190px;color:black" id="theTextInput"/>
+
+        
+         </div>
+        <div>
+                      <apex:outputPanel id="jspanel1"> 
+                    <apex:pageMessages />
+                    </apex:outputPanel>
+        </div>
+
+    
+  <!--  <input type="button" style="color:black" name="login"  value="Login"  OnClick = "validate();" />  -->
+      <apex:commandButton value="Login" action="{!validateData}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <apex:outputLink value="https://c.cs44.visual.force.com/apex/forgotPwd">Forgot Password ?</apex:outputLink>
+    
+
+ 
+    </div>
+    </div>  
+  </div>
+ 
+  </apex:form>
+
+ 
+
+</apex:page>

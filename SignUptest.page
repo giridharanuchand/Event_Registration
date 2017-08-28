@@ -1,0 +1,114 @@
+<apex:page controller="SignUptest" showheader="false">
+<a href="http://cci.uncc.edu/partners/membership"  target="_blank">
+            <apex:image value="{!URLFOR($Resource.banner, 'img/newBanner.png')}"  style="width:99%; margin-right:0.5%; margin-left:0.5%; margin-top:0.5%; margin-bottom-0.5%;"/>
+        </a>
+  <apex:stylesheet value="{!URLFOR($Resource.SATProResource, 'css/bootstrap.min.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.SATProResource, '/js/jquery.min.js')}"></apex:includeScript>
+     <apex:includeScript value="{!URLFOR($Resource.SATProResource, '/js/bootstrap.min.js')}"></apex:includeScript>
+   
+
+
+<apex:form >
+
+  <apex:outputPanel id="jspanel2"> 
+  <script>  
+  function onControllerReturn() {
+    alert('{!message}')
+  }
+  
+  function pop(div) {
+                document.getElementById('loginModal').style.display = 'block';
+            }
+            function hide(div) {
+                document.getElementById('loginModal').style.display = 'none';
+            }
+      
+       function validateInp(validationMsg)
+  {
+       window.console.log("validationMsg" +validationMsg);
+            var activeUser = "Activated"; 
+      window.console.log("activeUser" +activeUser);
+            var tempString1  = "{!errormsg}"; 
+     if(tempString1 == "Activated")
+            {
+              alert("User is already registered");
+            }
+      else
+          {
+             document.getElementById('loginModal').style.display = 'block';
+              }
+  }
+  </script>
+  </apex:outputPanel>
+  
+<apex:actionFunction name="validate" action="{!validateData}" rerender="jspanel,jspanel1"/>
+  <apex:actionFunction name="doControllerSave" action="{!storePwd}" oncomplete="validateInp('{!errormsg}')" rerender="jspanel2"/>
+  
+<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"> 
+<div class="panel panel-info" >  
+<div class="panel-heading">
+                        <div class="panel-title">Sign Up</div>
+                <!--        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>  -->
+ </div> 
+ <div style="padding-top:30px" class="panel-body" >
+ <h1>Welcome to Partner SignUp!</h1><br/> <br/>
+
+        <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+
+        <apex:selectList size="1" style="height:30px; width:190px;color:black" value="{!selecteduser}">
+
+             <apex:selectOptions value="{!users}"></apex:selectOptions>
+
+        </apex:selectList>
+
+        </div>
+
+        <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+
+        <apex:inputSecret value="{!inputValue}" style="height:30px;width:190px;color:black" id="theTextInput"/>
+
+        </div>
+
+
+ <!--   <apex:commandButton onclick="doControllerSave();" oncomplete="pop()" value="Save"/>  -->
+      <apex:commandButton onclick="doControllerSave()"  value="Sign Up" rerender="jspanel2"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <apex:outputLink value="https://c.cs44.visual.force.com/apex/LoginTest">Click here for Login!</apex:outputLink>
+      </div> 
+    </div>  
+ </div> 
+
+  
+  <div class="modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+          <div class="modal-dialog">
+          <div class="modal-content">
+                <div class="modal-header">
+                    <div class = "modal-body">
+                  <form>
+                  <h1>Enter the key</h1><br/>
+                    <apex:outputLabel >Key</apex:outputLabel><br/>
+                     <apex:inputText value="{!getkeyval}" styleClass="col-xs-4" id="theTextInput1"  html-placeholder="Key"/>
+                    <br/><br/><br/>
+                    <apex:outputPanel id="loginPanel" >     
+                     <div>
+                      <apex:outputPanel id="jspanel1"> 
+                    <apex:pageMessages />
+                    </apex:outputPanel>
+                  </div>
+                  </apex:outputPanel>   
+                 <input type="button" name="login" class="login loginModal-submit btn btn-default" value="Verify" oncomplete="pop()" OnClick = "validate();" />
+                 <input type="button" name="login" class="login loginModal-submit btn btn-default" value="Close" OnClick = "javascript:hide();" />
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div> 
+    
+  </apex:form>
+
+ 
+
+</apex:page>
+                    
